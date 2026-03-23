@@ -253,6 +253,59 @@ class _FoodListTabState extends State<FoodListTab> {
               ],
             ),
           ),
+          Expanded(
+            child: _filtered.isEmpty
+                ? const Center(child: Text('No food spots found.'))
+                : ListView.builder(
+                    itemCount: _filtered.length,
+                    itemBuilder: (ctx, i) {
+                      final r = _filtered[i];
+                      return Card(
+                        margin: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 4,
+                        ),
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            backgroundColor: Colors.green[100],
+                            child: Icon(
+                              Icons.restaurant,
+                              color: Colors.green[700],
+                            ),
+                          ),
+                          title: Text(
+                            r.name,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          subtitle: Text('${r.cuisine} • ${r.price}'),
+                          trailing: Chip(
+                            label: Text(
+                              r.isOpen ? 'Open' : 'Closed',
+                              style: TextStyle(
+                                color: r.isOpen
+                                    ? Colors.green[800]
+                                    : Colors.red[800],
+                                fontSize: 12,
+                              ),
+                            ),
+                            backgroundColor: r.isOpen
+                                ? Colors.green[50]
+                                : Colors.red[50],
+                          ),
+                          onTap: () async {
+                            await Navigator.push(
+                              ctx,
+                              MaterialPageRoute(
+                                builder: (_) =>
+                                    FoodSpotDetailsScreen(restaurant: r),
+                              ),
+                            );
+                          },
+                        ),
+                      );
+                    },
+                  ),
+          ),
         ],
       ),
     );
