@@ -184,4 +184,4 @@ class DatabaseHelper {
     final maps = await db.query('budget_entries', orderBy: 'date DESC');
     return maps.map((m) => BudgetEntry.fromMap(m)).toList();
   }
-}
+
