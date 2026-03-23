@@ -43,3 +43,20 @@ class DatabaseHelper {
         comment TEXT NOT NULL
       )
     ''');
+
+    await db.execute('''
+      CREATE TABLE favorites (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        restaurantId INTEGER NOT NULL UNIQUE
+      )
+    ''');
+
+    await db.execute('''
+      CREATE TABLE budget_entries (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        amount REAL NOT NULL,
+        date TEXT NOT NULL
+      )
+    ''');
+
