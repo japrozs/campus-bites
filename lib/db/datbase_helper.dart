@@ -123,4 +123,26 @@ class DatabaseHelper {
       await db.insert('restaurants', r);
     }
   }
+  
+  // ---- Restaurants ----
+  Future<List<Restaurant>> getRestaurants() async {
+    final db = await database;
+    final maps = await db.query('restaurants');
+    return maps.map((m) => Restaurant.fromMap(m)).toList();
+  }
 
+  // ---- Reviews ----
+  Future<int> insertReview(Review review) async {
+    final db = await database;
+    return await db.insert('reviews', review.toMap());
+  }
+
+  Future<List<Review>> getReviews(int restaurantId) async {
+    final db = await database;
+    final maps = await db.query(
+      'reviews',
+      where: 'restaurantId = ?',
+      whereArgs: [restaurantId],
+    );
+    return maps.map((m) => Review.fromMap(m)).toList();
+  }
