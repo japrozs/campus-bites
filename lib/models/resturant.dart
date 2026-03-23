@@ -14,3 +14,14 @@ class Restaurant {
     required this.hours,
     required this.isOpen,
   });
+
+  factory Restaurant.fromMap(Map<String, dynamic> map) {
+    return Restaurant(
+      id: map['id'],
+      name: map['name'],
+      cuisine: map['cuisine'],
+      price: map['price'],
+      hours: map['hours'],
+      isOpen: map['isOpen'] == 1,
+    );
+  }
