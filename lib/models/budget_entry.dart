@@ -18,3 +18,12 @@ class BudgetEntry {
       date: map['date'],
     );
   }
+  Map<String, dynamic> toMap() {
+    return {
+      if (id != null) 'id': id,
+      'name': name,
+      'amount': amount,
+      'date': date,
+    };
+  }
+}
