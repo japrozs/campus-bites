@@ -60,3 +60,67 @@ class DatabaseHelper {
       )
     ''');
 
+    // Seed some restaurants
+    final restaurants = [
+      {
+        'name': 'Campus Grill',
+        'cuisine': 'American',
+        'price': '\$',
+        'hours': '9 AM - 8 PM',
+        'isOpen': 1,
+      },
+      {
+        'name': 'Panda Express',
+        'cuisine': 'Chinese',
+        'price': '\$\$',
+        'hours': '10 AM - 9 PM',
+        'isOpen': 1,
+      },
+      {
+        'name': 'Subway',
+        'cuisine': 'Sandwiches',
+        'price': '\$',
+        'hours': '8 AM - 10 PM',
+        'isOpen': 1,
+      },
+      {
+        'name': 'Taco Bell',
+        'cuisine': 'Mexican',
+        'price': '\$',
+        'hours': '7 AM - 11 PM',
+        'isOpen': 1,
+      },
+      {
+        'name': 'Starbucks',
+        'cuisine': 'Coffee',
+        'price': '\$\$',
+        'hours': '6 AM - 7 PM',
+        'isOpen': 0,
+      },
+      {
+        'name': 'Pizza Hut',
+        'cuisine': 'Italian',
+        'price': '\$\$',
+        'hours': '11 AM - 10 PM',
+        'isOpen': 1,
+      },
+      {
+        'name': 'Chipotle',
+        'cuisine': 'Mexican',
+        'price': '\$\$',
+        'hours': '10 AM - 9 PM',
+        'isOpen': 1,
+      },
+      {
+        'name': 'Chick-fil-A',
+        'cuisine': 'American',
+        'price': '\$',
+        'hours': '6 AM - 10 PM',
+        'isOpen': 0,
+      },
+    ];
+    for (final r in restaurants) {
+      await db.insert('restaurants', r);
+    }
+  }
+
