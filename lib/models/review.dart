@@ -10,4 +10,22 @@ class Review {
     required this.rating,
     required this.comment,
   });
+
+  factory Review.fromMap(Map<String, dynamic> map) {
+    return Review(
+      id: map['id'],
+      restaurantId: map['restaurantId'],
+      rating: map['rating'],
+      comment: map['comment'],
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      if (id != null) 'id': id,
+      'restaurantId': restaurantId,
+      'rating': rating,
+      'comment': comment,
+    };
+  }
 }
