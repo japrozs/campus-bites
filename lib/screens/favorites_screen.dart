@@ -39,7 +39,56 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                 ],
               ),
             )
-          : Scaffold(),
+          : ListView.builder(
+              itemCount: _favorites.length,
+              itemBuilder: (ctx, i) {
+                final r = _favorites[i];
+                return Card(
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 4,
+                  ),
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      backgroundColor: Colors.red[100],
+                      child: const Icon(Icons.favorite, color: Colors.red),
+                    ),
+                    title: Text(
+                      r.name,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text('${r.cuisine} • ${r.price}'),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: const Icon(
+                            Icons.open_in_new,
+                            color: Colors.green,
+                          ),
+                          tooltip: 'Open',
+                          onPressed: () async {
+                            await Navigator.push(
+                              ctx,
+                              MaterialPageRoute(
+                                builder: (_) =>
+                                    FoodSpotDetailsScreen(restaurant: r),
+                              ),
+                            );
+                            _loadFavorites();
+                          },
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.delete, color: Colors.red),
+                          tooltip: 'Remove',
+                          onPressed: () => _removeFavorite(r.id!),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),,
     );
   }
 }
