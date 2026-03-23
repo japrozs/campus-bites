@@ -21,3 +21,25 @@ class DatabaseHelper {
     final path = join(dbPath, fileName);
     return await openDatabase(path, version: 1, onCreate: _createDB);
   } 
+
+
+  Future _createDB(Database db, int version) async {
+    await db.execute('''
+      CREATE TABLE restaurants (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        cuisine TEXT NOT NULL,
+        price TEXT NOT NULL,
+        hours TEXT NOT NULL,
+        isOpen INTEGER NOT NULL DEFAULT 1
+      )
+    ''');
+
+    await db.execute('''
+      CREATE TABLE reviews (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        restaurantId INTEGER NOT NULL,
+        rating INTEGER NOT NULL,
+        comment TEXT NOT NULL
+      )
+    ''');
