@@ -164,3 +164,20 @@ class DatabaseHelper {
       whereArgs: [restaurantId],
     );
   }
+
+  Future<List<int>> getFavoriteIds() async {
+    final db = await database;
+    final maps = await db.query('favorites');
+    return maps.map((m) => m['restaurantId'] as int).toList();
+  }
+
+  Future<bool> isFavorite(int restaurantId) async {
+    final ids = await getFavoriteIds();
+    return ids.contains(restaurantId);
+  }
+
+  // ---- Budget Entries ----
+  Future<int> insertBudgetEntry(BudgetEntry entry) async {
+    final db = await database;
+    return await db.insert('budget_entries', entry.toMap());
+  }
