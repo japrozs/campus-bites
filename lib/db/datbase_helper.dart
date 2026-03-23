@@ -60,7 +60,6 @@ class DatabaseHelper {
       )
     ''');
 
-<<<<<<< Updated upstream
     // Seed some restaurants
     final restaurants = [
       {
