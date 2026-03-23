@@ -56,9 +56,91 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Settings Screen')),
-      body: const Center(
-        child: Text('Settings, Flutter!', style: TextStyle(fontSize: 24)),
+      appBar: AppBar(
+        title: const Text('Settings'),
+        backgroundColor: Colors.green[700],
+        foregroundColor: Colors.white,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Preferences',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 12),
+            Card(
+              child: Column(
+                children: [
+                  SwitchListTile(
+                    title: const Text('Dark Mode'),
+                    subtitle: const Text('Toggle dark theme'),
+                    value: _darkMode,
+                    activeColor: Colors.green[700],
+                    onChanged: _onDarkModeChanged,
+                  ),
+                  const Divider(height: 0),
+                  SwitchListTile(
+                    title: const Text('Notifications'),
+                    subtitle: const Text('Enable push notifications'),
+                    value: _notifications,
+                    activeColor: Colors.green[700],
+                    onChanged: (val) => setState(() => _notifications = val),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 16),
+            const Text(
+              'Default Filter on Home',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 4),
+            const Text(
+              'Sets which filter opens first when you tap Filter on the Home screen.',
+              style: TextStyle(color: Colors.grey, fontSize: 13),
+            ),
+            const SizedBox(height: 8),
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
+                child: DropdownButtonFormField<String>(
+                  value: _filterPreference,
+                  decoration: const InputDecoration(
+                    border: InputBorder.none,
+                    labelText: 'Default Filter',
+                  ),
+                  items: _filterOptions
+                      .map((o) => DropdownMenuItem(value: o, child: Text(o)))
+                      .toList(),
+                  onChanged: (val) {
+                    if (val != null) setState(() => _filterPreference = val);
+                  },
+                ),
+              ),
+            ),
+            const SizedBox(height: 24),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green[700],
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                ),
+                onPressed: _saveSettings,
+                child: const Text(
+                  'Save Settings',
+                  style: TextStyle(color: Colors.white, fontSize: 16),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
