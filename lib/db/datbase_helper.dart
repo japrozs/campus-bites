@@ -65,6 +65,7 @@ class DatabaseHelper {
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     // Seed some restaurants
     final restaurants = [
       {
@@ -190,6 +191,8 @@ class DatabaseHelper {
     return maps.map((m) => BudgetEntry.fromMap(m)).toList();
   }
 }
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 =======
