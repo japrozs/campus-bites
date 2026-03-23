@@ -25,3 +25,15 @@ class Restaurant {
       isOpen: map['isOpen'] == 1,
     );
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      if (id != null) 'id': id,
+      'name': name,
+      'cuisine': cuisine,
+      'price': price,
+      'hours': hours,
+      'isOpen': isOpen ? 1 : 0,
+    };
+  }
+}
