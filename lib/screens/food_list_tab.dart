@@ -222,6 +222,34 @@ class _FoodListTabState extends State<FoodListTab> {
                   ),
                 ),
                 const SizedBox(width: 8),
+                Stack(
+                  children: [
+                    OutlinedButton.icon(
+                      onPressed: _showFilterSheet,
+                      icon: const Icon(Icons.filter_list),
+                      label: const Text('Filter'),
+                      style: _hasActiveFilters
+                          ? OutlinedButton.styleFrom(
+                              foregroundColor: Colors.green[700],
+                              side: BorderSide(color: Colors.green[700]!),
+                            )
+                          : null,
+                    ),
+                    if (_hasActiveFilters)
+                      Positioned(
+                        right: 0,
+                        top: 0,
+                        child: Container(
+                          width: 10,
+                          height: 10,
+                          decoration: const BoxDecoration(
+                            color: Colors.green,
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
               ],
             ),
           ),
