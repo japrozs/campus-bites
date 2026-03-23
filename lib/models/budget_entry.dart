@@ -10,6 +10,7 @@ class BudgetEntry {
     required this.amount,
     required this.date,
   });
+
   factory BudgetEntry.fromMap(Map<String, dynamic> map) {
     return BudgetEntry(
       id: map['id'],
@@ -18,6 +19,7 @@ class BudgetEntry {
       date: map['date'],
     );
   }
+
   Map<String, dynamic> toMap() {
     return {
       if (id != null) 'id': id,
