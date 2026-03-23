@@ -146,3 +146,21 @@ class DatabaseHelper {
     );
     return maps.map((m) => Review.fromMap(m)).toList();
   }
+
+
+  // ---- Favorites ----
+  Future<int> addFavorite(int restaurantId) async {
+    final db = await database;
+    return await db.insert('favorites', {
+      'restaurantId': restaurantId,
+    }, conflictAlgorithm: ConflictAlgorithm.ignore);
+  }
+
+  Future<int> removeFavorite(int restaurantId) async {
+    final db = await database;
+    return await db.delete(
+      'favorites',
+      where: 'restaurantId = ?',
+      whereArgs: [restaurantId],
+    );
+  }
