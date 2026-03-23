@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../db/datbase_helper.dart';
+import '../models/restaurant.dart';
 
 class FoodListTab extends StatefulWidget {
   const FoodListTab({super.key});
