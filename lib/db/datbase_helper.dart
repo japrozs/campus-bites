@@ -20,7 +20,7 @@ class DatabaseHelper {
     final dbPath = await getDatabasesPath();
     final path = join(dbPath, fileName);
     return await openDatabase(path, version: 1, onCreate: _createDB);
-  } 
+  } //
 
 
   Future _createDB(Database db, int version) async {
@@ -42,7 +42,7 @@ class DatabaseHelper {
         rating INTEGER NOT NULL,
         comment TEXT NOT NULL
       )
-    ''');
+    '''); //
 
     await db.execute('''
       CREATE TABLE favorites (
@@ -123,7 +123,7 @@ class DatabaseHelper {
       await db.insert('restaurants', r);
     }
   }
-  
+
   // ---- Restaurants ----
   Future<List<Restaurant>> getRestaurants() async {
     final db = await database;
@@ -145,8 +145,7 @@ class DatabaseHelper {
       whereArgs: [restaurantId],
     );
     return maps.map((m) => Review.fromMap(m)).toList();
-  }
-
+  }//
 
   // ---- Favorites ----
   Future<int> addFavorite(int restaurantId) async {
@@ -163,7 +162,25 @@ class DatabaseHelper {
       where: 'restaurantId = ?',
       whereArgs: [restaurantId],
     );
+  } //
+
+  Future<List<int>> getFavoriteIds() async {
+    final db = await database;
+    final maps = await db.query('favorites');
+    return maps.map((m) => m['restaurantId'] as int).toList();
   }
+
+  Future<bool> isFavorite(int restaurantId) async {
+    final ids = await getFavoriteIds();
+    return ids.contains(restaurantId);
+  }
+
+  // ---- Budget Entries ----
+  Future<int> insertBudgetEntry(BudgetEntry entry) async {
+    final db = await database;
+    return await db.insert('budget_entries', entry.toMap());
+  }//
+
   Future<int> updateBudgetEntry(BudgetEntry entry) async {
     final db = await database;
     return await db.update(
@@ -183,5 +200,5 @@ class DatabaseHelper {
     final db = await database;
     final maps = await db.query('budget_entries', orderBy: 'date DESC');
     return maps.map((m) => BudgetEntry.fromMap(m)).toList();
-  }
+  }//
 }
