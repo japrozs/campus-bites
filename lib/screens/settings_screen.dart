@@ -31,6 +31,28 @@ class _SettingsScreenState extends State<SettingsScreen> {
     });
   }
 
+  Future<void> _onDarkModeChanged(bool val) async {
+    setState(() => _darkMode = val);
+    // Update the global notifier immediately — app theme changes instantly.
+    darkModeNotifier.value = val;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('darkMode', val);
+  }
+
+  Future<void> _saveSettings() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('notifications', _notifications);
+    await prefs.setString('filterPreference', _filterPreference);
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Settings saved!'),
+          duration: Duration(seconds: 1),
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
