@@ -60,10 +60,6 @@ class DatabaseHelper {
       )
     ''');
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
     // Seed some restaurants
     final restaurants = [
       {
@@ -188,10 +184,4 @@ class DatabaseHelper {
     final maps = await db.query('budget_entries', orderBy: 'date DESC');
     return maps.map((m) => BudgetEntry.fromMap(m)).toList();
   }
-}
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+
