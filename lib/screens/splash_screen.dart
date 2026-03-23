@@ -25,13 +25,13 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.green[700],
-      body: Center(
+      body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.restaurant, size: 80, color: Colors.white),
-            const SizedBox(height: 16),
-            const Text(
+            Icon(Icons.restaurant, size: 80, color: Colors.white),
+            SizedBox(height: 16),
+            Text(
               'CampusBites',
               style: TextStyle(
                 fontSize: 36,
@@ -39,13 +39,13 @@ class _SplashScreenState extends State<SplashScreen> {
                 color: Colors.white,
               ),
             ),
-            const SizedBox(height: 8),
-            const Text(
+            SizedBox(height: 8),
+            Text(
               'Campus Food Finder & Budget Tracker',
               style: TextStyle(fontSize: 14, color: Colors.white70),
             ),
-            const SizedBox(height: 40),
-            const CircularProgressIndicator(
+            SizedBox(height: 40),
+            CircularProgressIndicator(
               valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
             ),
           ],
