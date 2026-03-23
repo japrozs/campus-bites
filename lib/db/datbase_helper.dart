@@ -165,5 +165,24 @@ class DatabaseHelper {
       whereArgs: [restaurantId],
     );
   }
-=======
->>>>>>> Stashed changes
+  Future<int> updateBudgetEntry(BudgetEntry entry) async {
+    final db = await database;
+    return await db.update(
+      'budget_entries',
+      entry.toMap(),
+      where: 'id = ?',
+      whereArgs: [entry.id],
+    );
+  }
+
+  Future<int> deleteBudgetEntry(int id) async {
+    final db = await database;
+    return await db.delete('budget_entries', where: 'id = ?', whereArgs: [id]);
+  }
+
+  Future<List<BudgetEntry>> getBudgetEntries() async {
+    final db = await database;
+    final maps = await db.query('budget_entries', orderBy: 'date DESC');
+    return maps.map((m) => BudgetEntry.fromMap(m)).toList();
+  }
+}
