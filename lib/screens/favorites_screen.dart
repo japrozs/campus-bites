@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../db/datbase_helper.dart';
-import '../models/resturant.dart';
+import '../db/database_helper.dart';
+import '../models/restaurant.dart';
+import 'food_spot_details_screen.dart';
 
 class FavoritesScreen extends StatefulWidget {
   const FavoritesScreen({super.key});
@@ -12,6 +13,11 @@ class FavoritesScreen extends StatefulWidget {
 class _FavoritesScreenState extends State<FavoritesScreen> {
   List<Restaurant> _favorites = [];
 
+  @override
+  void initState() {
+    super.initState();
+    _loadFavorites();
+  }
 
   Future<void> _loadFavorites() async {
     final ids = await DatabaseHelper.instance.getFavoriteIds();
@@ -108,7 +114,8 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                   ),
                 );
               },
-            ),,
+            ),
     );
   }
 }
+
