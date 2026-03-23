@@ -164,20 +164,24 @@ class DatabaseHelper {
       whereArgs: [restaurantId],
     );
   }
-
-  Future<List<int>> getFavoriteIds() async {
+  Future<int> updateBudgetEntry(BudgetEntry entry) async {
     final db = await database;
-    final maps = await db.query('favorites');
-    return maps.map((m) => m['restaurantId'] as int).toList();
+    return await db.update(
+      'budget_entries',
+      entry.toMap(),
+      where: 'id = ?',
+      whereArgs: [entry.id],
+    );
   }
 
-  Future<bool> isFavorite(int restaurantId) async {
-    final ids = await getFavoriteIds();
-    return ids.contains(restaurantId);
-  }
-
-  // ---- Budget Entries ----
-  Future<int> insertBudgetEntry(BudgetEntry entry) async {
+  Future<int> deleteBudgetEntry(int id) async {
     final db = await database;
-    return await db.insert('budget_entries', entry.toMap());
+    return await db.delete('budget_entries', where: 'id = ?', whereArgs: [id]);
   }
+
+  Future<List<BudgetEntry>> getBudgetEntries() async {
+    final db = await database;
+    final maps = await db.query('budget_entries', orderBy: 'date DESC');
+    return maps.map((m) => BudgetEntry.fromMap(m)).toList();
+  }
+}
