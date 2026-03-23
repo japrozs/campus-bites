@@ -12,6 +12,15 @@ class FavoritesScreen extends StatefulWidget {
 class _FavoritesScreenState extends State<FavoritesScreen> {
   List<Restaurant> _favorites = [];
 
+
+  Future<void> _loadFavorites() async {
+    final ids = await DatabaseHelper.instance.getFavoriteIds();
+    final all = await DatabaseHelper.instance.getRestaurants();
+    setState(() {
+      _favorites = all.where((r) => ids.contains(r.id)).toList();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
