@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'food_list_tab.dart';
+import 'budget_tracker_screen.dart';
+import 'favorites_screen.dart';
+import 'settings_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -10,7 +14,12 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
 
-  final List<Widget> _tabs = const [];
+  final List<Widget> _tabs = const [
+    FoodListTab(),
+    BudgetTrackerScreen(),
+    FavoritesScreen(),
+    SettingsScreen(),
+  ];
 
   @override
   Widget build(BuildContext context) {
