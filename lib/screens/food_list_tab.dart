@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../db/datbase_helper.dart';
+import '../db/database_helper.dart';
 import '../models/restaurant.dart';
+import 'food_spot_details_screen.dart';
 
 class FoodListTab extends StatefulWidget {
   const FoodListTab({super.key});
@@ -11,6 +12,8 @@ class FoodListTab extends StatefulWidget {
 }
 
 class _FoodListTabState extends State<FoodListTab> {
+  List<Restaurant> _all = [];
+  List<Restaurant> _filtered = [];
   final _searchController = TextEditingController();
   String? _cuisineFilter;
   String? _priceFilter;
