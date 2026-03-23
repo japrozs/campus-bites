@@ -21,6 +21,17 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
     });
   }
 
+  Future<void> _removeFavorite(int restaurantId) async {
+    await DatabaseHelper.instance.removeFavorite(restaurantId);
+    _loadFavorites();
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Removed from favorites.'),
+        duration: Duration(seconds: 1),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
